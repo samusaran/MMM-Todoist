@@ -239,13 +239,17 @@ Module.register("MMM-Todoist", {
 		}
 
 		//Filter the Todos by the Projects specified in the Config
-		tasks.items.forEach(function (item) {
-			self.config.projects.forEach(function (project) {
-				if (item.project_id == project) {
-					items.push(item);
-				}
+                if (this.config.projects.length > 0) {
+			tasks.items.forEach(function (item) {
+				self.config.projects.forEach(function (project) {
+					if (item.project_id == project) {
+						items.push(item);
+					}
+				});
 			});
-		});
+		} else {
+			items = tasks.items;
+		}
 
 		//Used for ordering by date
 		items.forEach(function (item) {
